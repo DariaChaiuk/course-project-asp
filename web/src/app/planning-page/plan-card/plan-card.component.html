@@ -1,0 +1,18 @@
+<div class="card-plan border d-flex flex-column justify-content-between">
+    <div class="bg-primary text-white title-text p-2 rounded-pill">{{plan?.title}}</div>
+        <select class="form-select" 
+                (change)="onChange($event)"
+                (click)="$event?.stopPropagation()">
+            <option *ngFor="let status of statuses;"
+                    [value]="status.id"
+                    [selected] = "plan?.statusId == status?.id"
+                    (change)="onChange(status)"
+            >{{status.statusName}}
+        </select>
+    <div class="d-flex align-items-center justify-content-between">
+        <div>Created: {{plan?.createdDate | date: "dd/MM/yyyy"}}</div>
+        <img class="delete-img" 
+                 src="https://www.freeiconspng.com/uploads/remove-icon-png-24.png"
+                 (click) = "deleteIcon()">          
+    </div>
+</div>

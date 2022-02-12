@@ -1,0 +1,36 @@
+<div class="bg-secondary">
+<div class="container">
+<div class="d-flex justify-content-center align-items-center flex-column">
+    <div class="p-4 img-r">
+        <img class="user-img border rounded-circle" src={{currentUser?.iconUrl}}>
+    </div>
+    <div>
+        <h2 class="text-light">{{currentUser?.name}}</h2>
+    </div>
+    <div>
+        <app-password-reset-modal 
+            [isVisible]="isVisible" 
+            (modalClosed) = "closeModal()" 
+            (modalClosedWithEdit) = "closeModalAndEdit($event)">
+        </app-password-reset-modal>
+        <button class="btn btn-primary" (click)="openModal()">Reset password</button>
+        <div class="mt-2 text-danger" *ngIf = "error != '' ">{{error}}</div>
+    </div>
+</div>
+
+<div class="bg-secondary p-4 container">
+    <form class="mt-4 border border-light rounded-2 p-3 d-flex justify-content-center align-items-center flex-column" [formGroup] = "form">
+        <div class="input-group mb-3">
+            <span class="input-group-text w-25" id="basic-addon1">User name:</span>
+            <input type="text" class="form-control" placeholder="Username" aria-label="Username" formControlName = 'username' aria-describedby="basic-addon1">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text w-25" id="basic-addon1">Icon url:</span>
+            <input type="text" class="form-control" placeholder="Icon url" aria-label="IconUrl" formControlName = 'iconUrl' aria-describedby="basic-addon1">
+        </div>
+        <button class="btn btn-primary w-50 username-btn" (click) = "updateUser()">Apply changes</button>
+    </form>
+    
+</div>
+</div>
+</div>

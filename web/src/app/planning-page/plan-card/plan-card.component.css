@@ -1,0 +1,31 @@
+.card-plan{
+    padding: 5%;
+    width: 150px!important;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+
+.delete-img{
+    width: 20%;
+}
+
+.title-text{
+    width: fit-content;
+}
+
+img:hover{
+    position: relative;
+    top:-5px;
+    left:-2px;
+    width: 21%;
+    height:auto;
+    display:block;
+    z-index:999;
+}
+
+@media (max-width: 880px ){
+    .card-plan{
+        width: 240px!important;
+    }
+}

@@ -1,0 +1,64 @@
+<div class="d-flex align-items-center mb-3 justify-content-between header-buttons-container">
+    <div class="d-flex align-items-center status-add-container input-group border p-2 mt-1" [formGroup]="newStatusForm">
+        <button type="button" class="btn btn-outline-primary" (click)="openModal()">Add new plan</button>
+        <button type="button" class="btn btn-outline-primary" (click) = addNewStatus($event)>Add new status</button>
+        <input placeholder="Enter status name" class="me-2 form-control" formControlName="newStatusName">
+    </div>
+    <div [formGroup]="searchPlanForm" class="search-container border input-group p-2 mt-1">
+        <label class="me-2 input-group-text" for="search">Search:</label>
+        <input id="search" type="text" class="form-control me-2" placeholder="Search plan title..." formControlName = 'searchedPlan' (input)="searchPlan()">
+    </div>
+    <app-modal-plan-card 
+        [plan] = "selectedPlan" 
+        [statuses]="statuses" 
+        [isVisible]="isVisible" 
+        (modalClosed) = "closeModal()" 
+        (modalClosedWithEdit) = "closeModalAndEdit($event)">
+    </app-modal-plan-card>
+    <app-modal-status-edit
+        [status] = "selectedStatus"
+        [isVisible] = "isVisibleStatus" 
+        (modalClosed) = "closeModalStatus()"
+        (modalClosedWithEdit) = "closeModalAndEditStatus($event)">
+    </app-modal-status-edit>
+</div>
+<div class="border rounded-2">
+
+        <div *ngFor="let status of statuses; let i = index" class="d-flex w-100 plans-container">
+            <div class="border-bottom border-end bg-secondary d-flex flex-column card-row w-25 deal-title">
+                <div class="d-flex justify-content-center icons-container align-items-center mb-5 pt-3 ps-3">
+                    <div class="img-status" >
+                        <img class="icon-img" 
+                        src="../../assets/trash-bin.png"
+                        (click) = "deleteStatus(status.id)"> 
+                    </div>
+                    <div class="img-status large-screen-pencil">
+                        <img class="icon-img" 
+                        src="../../assets/pencil.png"
+                        (click) = "selectStatus(status)"> 
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="border p-3 rounded-pill text-white label-card" [ngStyle]="{'background-color': colors[i]}">
+                        <h2>{{status.statusName}}</h2>
+                    </div>
+                </div>
+                <div class="small-screen-pencil">
+                    <div class="img-status">
+                        <img class="icon-img" 
+                        src="../../assets/pencil.png"
+                        (click) = "selectStatus(status)"> 
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex plan-card card-row card-collection w-75 p-3 border-bottom">
+                <div *ngFor="let plan of plansForStatus(status)?.plans" class = "plan" (click)= selectPlan(plan)>
+                    <app-plan-card [plan]="plan"
+                         [statuses]="statuses"
+                         (statusChanged) = "onStatusChanged($event, plan)"
+                         (delete) = "onPlanDelete(plan)">
+                    </app-plan-card>
+                </div>
+            </div>
+        </div>
+</div>

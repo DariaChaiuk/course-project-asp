@@ -1,0 +1,27 @@
+.user-img{
+    width: 100%;
+    height: auto;
+}
+
+.img-r{
+    min-width: 50%;
+}
+
+.container{
+    max-width: 500px;
+}
+
+@media (max-width: 880px ){
+    .username-btn {
+        width: 100% !important;
+    }
+
+}
+
+@media (max-width: 580px ){
+    span{
+        display: none;
+    }
+
+}
+
